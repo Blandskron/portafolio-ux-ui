@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de [Tu Nombre] - Diseñador UX/UI</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Fuente (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Un gris muy claro para el fondo */
+            color: #1a202c; /* Texto oscuro principal */
+        }
+        /* Estilo para el modal */
+        #project-modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        /* Animación sutil de entrada para secciones */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilo de "tags" de habilidades */
+        .skill-tag {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        /* Estilo para el "scroll-snap" en la galería del modal */
+        .modal-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; /* Para iOS */
+            scrollbar-width: none; /* Firefox */
+        }
+        .modal-gallery::-webkit-scrollbar {
+            display: none; /* Safari y Chrome */
+        }
+        .modal-gallery-item {
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            width: 90%;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ===== BARRA DE NAVEGACIÓN ===== -->
+    <nav class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 max-w-6xl">
+            <div class="flex items-center justify-between">
+                <!-- Tu Logo o Nombre -->
+                <a href="#" class="text-xl font-bold text-gray-800 tracking-tight">
+                    [Tu Nombre]
+                </a>
+                
+                <!-- Menú de escritorio -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#proceso" class="text-gray-600 hover:text-indigo-600 transition-colors">Proceso</a>
+                    <a href="#proyectos" class="text-gray-600 hover:text-indigo-600 transition-colors">Proyectos</a>
+                    <a href="#contacto" class="ml-4 px-5 py-2 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 transition-all transform hover:scale-105">
+                        Hablemos
+                    </a>
+                </div>
+                
+                <!-- Botón de Menú Móvil -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Menú Móvil (oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#proceso" class="block px-6 py-3 text-gray-600 hover:bg-gray-50">Proceso</a>
+            <a href="#proyectos" class="block px-6 py-3 text-gray-600 hover:bg-gray-50">Proyectos</a>
+            <a href="#contacto" class="block px-6 py-3 text-indigo-600 font-medium hover:bg-gray-50">Hablemos</a>
+        </div>
+    </nav>
+
+    <!-- ===== SECCIÓN HERO ===== -->
+    <header class="container mx-auto px-6 py-24 md:py-32 max-w-6xl">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tighter">
+                Diseñador de Experiencias
+                <span class="block text-indigo-600">que conectan y funcionan.</span>
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl">
+                Soy [Tu Nombre], diseñador UX/UI. No solo creo interfaces bonitas, diseño interacciones intuitivas que resuelven problemas reales.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#proyectos" class="px-8 py-3 text-lg font-medium text-center text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 transition-all transform hover:scale-105">
+                    Ver mis proyectos
+                </a>
+                <a href="#contacto" class="px-8 py-3 text-lg font-medium text-center text-indigo-700 bg-indigo-100 rounded-full hover:bg-indigo-200 transition-colors">
+                    Contactar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN DE PROCESO (VISUAL) ===== -->
+    <section id="proceso" class="py-20 bg-white fade-in-section">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Mi Proceso de Diseño</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    De la empatía al prototipo. Así convierto ideas en realidad.
+                </p>
+            </div>
+            
+            <!-- Grid del Proceso Visual -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">
+                
+                <!-- Paso 1: Investigar -->
+                <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-2xl transition-all hover:shadow-xl hover:bg-white">
+                    <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6">
+                        <!-- Icono: Investigación (Usuarios) -->
+                        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-2.29l-2.122 2.122a1 1 0 01-1.414 0l-2.122-2.122A3 3 0 005 18v2h5m5-16h-5.356a3 3 0 00-2.29 5.356l2.122 2.122a1 1 0 010 1.414l-2.122 2.122A3 3 0 006.644 16H2v-2a3 3 0 015.356-2.29l2.122-2.122a1 1 0 000-1.414l-2.122-2.122A3 3 0 012 6V4h5.356a3 3 0 012.29 5.356l2.122 2.122a1 1 0 001.414 0l2.122-2.122A3 3 0 0117 4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">1. Investigar</h3>
+                    <p class="text-gray-600">
+                        Todo empieza entendiendo al usuario. (Personas, Mapas de Empatía, User Journeys).
+                    </p>
+                </div>
+                
+                <!-- Paso 2: Definir -->
+                <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-2xl transition-all hover:shadow-xl hover:bg-white">
+                    <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6">
+                        <!-- Icono: Definir (Flujos) -->
+                        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">2. Definir</h3>
+                    <p class="text-gray-600">
+                        Organizo la información y creo la estructura. (Arquitectura de Info, User Flows).
+                    </p>
+                </div>
+
+                <!-- Paso 3: Diseñar -->
+                <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-2xl transition-all hover:shadow-xl hover:bg-white">
+                    <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6">
+                        <!-- Icono: Diseñar (Wireframes) -->
+                        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">3. Diseñar</h3>
+                    <p class="text-gray-600">
+                        De bocetos a interfaces de alta fidelidad. (Wireframes, Mockups, Styleguides).
+                    </p>
+                </div>
+                
+                <!-- Paso 4: Probar -->
+                <div class="flex flex-col items-center text-center p-6 bg-gray-50 rounded-2xl transition-all hover:shadow-xl hover:bg-white">
+                    <div class="flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full mb-6">
+                        <!-- Icono: Probar (Test) -->
+                        <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">4. Probar</h3>
+                    <p class="text-gray-600">
+                        Valido el diseño con usuarios reales e itero. (Test de Usabilidad, Prototipos).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN DE PROYECTOS (VISUAL) ===== -->
+    <section id="proyectos" class="py-20 fade-in-section">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Proyectos Destacados</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Un vistazo a mi trabajo. Haz clic para ver el proceso visual.
+                </p>
+            </div>
+            
+            <!-- Grid de Proyectos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Proyecto 1 -->
+                <div class="project-card rounded-2xl overflow-hidden bg-white shadow-lg transition-all transform hover:shadow-2xl hover:-translate-y-2 cursor-pointer" data-project-id="1">
+                    <!-- Imagen Principal del Proyecto -->
+                    <img src="https://placehold.co/600x400/6366f1/ffffff?text=App+Finanzas" 
+                         onerror="this.src='https://placehold.co/600x400/6366f1/ffffff?text=Proyecto+1'"
+                         alt="Mockup principal de la app de finanzas" 
+                         class="w-full h-72 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">App de Finanzas Personales</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">UI Design</span>
+                            <span class="skill-tag">Mobile App</span>
+                            <span class="skill-tag">Prototipado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="project-card rounded-2xl overflow-hidden bg-white shadow-lg transition-all transform hover:shadow-2xl hover:-translate-y-2 cursor-pointer" data-project-id="2">
+                    <!-- Imagen Principal del Proyecto -->
+                    <img src="https://placehold.co/600x400/ec4899/ffffff?text=E-commerce+Moda" 
+                         onerror="this.src='https://placehold.co/600x400/ec4899/ffffff?text=Proyecto+2'"
+                         alt="Mockup principal de E-commerce de moda" 
+                         class="w-full h-72 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Rediseño E-commerce de Moda</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">UX Research</span>
+                            <span class="skill-tag">Web Design</span>
+                            <span class="skill-tag">Sistema de Diseño</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Puedes añadir más proyectos aquí -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN DE HABILIDADES Y HERRAMIENTAS ===== -->
+    <section id="herramientas" class="py-20 bg-white fade-in-section">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Habilidades y Herramientas</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Las herramientas que uso para construir experiencias.
+                </p>
+            </div>
+            
+            <!-- Grid de Logos de Herramientas -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 items-center">
+                <!-- Figma -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Figma" alt="Logo de Figma" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">Figma</span>
+                </div>
+                <!-- Sketch -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Sketch" alt="Logo de Sketch" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">Sketch</span>
+                </div>
+                <!-- Adobe XD -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Adobe+XD" alt="Logo de Adobe XD" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">Adobe XD</span>
+                </div>
+                <!-- Protopie -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=ProtoPie" alt="Logo de Protopie" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">ProtoPie</span>
+                </div>
+                <!-- Illustrator -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Illustrator" alt="Logo de Illustrator" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">Illustrator</span>
+                </div>
+                <!-- Maze -->
+                <div class="flex flex-col items-center p-4 rounded-lg transition-all hover:bg-gray-50">
+                    <img src="https://placehold.co/80x80/f3f4f6/a3a3a3?text=Maze" alt="Logo de Maze" class="h-16 w-16 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
+                    <span class="mt-3 font-medium text-gray-600">Maze</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN DE CONTACTO ===== -->
+    <footer id="contacto" class="py-24 bg-gray-900 text-white fade-in-section">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold">¿Hablemos?</h2>
+            <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                Estoy disponible para proyectos freelance o una charla sobre diseño.
+                No dudes en contactarme.
+            </p>
+            <a href="mailto:tuemail@dominio.com" class="mt-10 inline-block px-10 py-4 text-lg font-medium text-center text-gray-900 bg-white rounded-full shadow-lg hover:bg-gray-200 transition-all transform hover:scale-105">
+                enviar un email
+            </a>
+            
+            <!-- Links a redes (Behance, Dribbble, LinkedIn) -->
+            <div class="flex justify-center space-x-8 mt-16">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <!-- Icono LinkedIn -->
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Dribbble</span>
+                    <!-- Icono Dribbble -->
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zM8.339 4.318c.28-.52 2.684-4.004 7.025-3.321 4.34.682 3.684 4.545 3.398 5.151-1.296-1.022-3.41-1.93-5.525-1.93-2.012 0-3.83.743-5.9 1.879.001-.06.001-.119 0-.179zm-2.195 2.45c-2.038 1.442-3.21 3.738-3.21 6.257 0 1.25.312 2.424.873 3.468 1.442-.8 3.013-1.42 4.678-1.839-1.426-1.88-2.316-4.025-2.34-6.286-.001 0 0 0 0 0zm11.233 1.839c.041 2.302-.85 4.502-2.341 6.372 1.666.419 3.236 1.039 4.678 1.839.561-1.044.873-2.218.873-3.468.001-2.58-1.229-4.938-3.33-6.438-.306-.217-.611-.424-.92.625v.07zM12 13.62c1.933 0 3.708.973 4.835 2.568-1.091 1.022-2.38 1.764-3.79 2.157-1.385-.418-2.651-1.18-3.717-2.208 1.101-1.57 2.825-2.517 4.672-2.517zM7.369 18.1c-1.121-.76-2.115-1.714-2.922-2.821.14-.099.28-.198.42-.297C6.01 16.1 7.82 17.51 9.9 18.57c-1.06.31-2.16.5-3.29.5-.41 0-.82-.02-1.241-.07zM16.8 15.278c.14.099.28.198.42.297-1.14 1.63-3.2 3.01-5.32 3.65v-.02c2.08-.9 3.89-2.3 5.04-3.628.28-.33.56-.66.86-.9z"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Behance</span>
+                    <!-- Icono Behance -->
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6h-6v-2h6v2zm-6 4h6v-2h-6v2zm6 4h-6v-2h-6v2h6v2zm-12 2h6v-2h-6v2zm-6-8h6v-2h-6v2zm0 4h6v-2h-6v2zm-2-10h24v24h-24v-24zm2 2v20h20v-20h-20z"/></svg>
+                </a>
+            </div>
+
+            <p class="mt-16 text-sm text-gray-500">© 2025 [Tu Nombre]. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <!-- ===== MODAL DE PROYECTO (VISUAL) ===== -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 backdrop-blur-sm invisible opacity-0">
+        
+        <!-- Contenedor del Modal -->
+        <div id="modal-container" class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden transition-all transform scale-95">
+            
+            <!-- Botón de Cerrar -->
+            <button id="modal-close-btn" class="absolute top-4 right-4 z-10 text-gray-500 hover:text-gray-900 transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <!-- Contenido que se carga dinámicamente -->
+            <div id="modal-content" class="h-full overflow-y-auto">
+                
+                <!-- Contenido de Ejemplo del Proyecto 1 (oculto) -->
+                <div id="project-1-content" class="hidden">
+                    <div class="p-8 md:p-12">
+                        <h2 class="text-3xl font-bold text-gray-900">App de Finanzas Personales</h2>
+                        <div class="flex flex-wrap gap-2 mt-3 mb-6">
+                            <span class="skill-tag">UI Design</span>
+                            <span class="skill-tag">Mobile App</span>
+                            <span class="skill-tag">Prototipado</span>
+                        </div>
+                        <p class="text-lg text-gray-600">
+                            El reto era crear una app que hiciera la gestión de finanzas algo simple y motivador.
+                        </p>
+                    </div>
+                    <!-- Galería Visual del Proceso -->
+                    <div class="px-8 md:px-12 pb-12">
+                        <div class="modal-gallery">
+                            <!-- 1. Wireframes -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">Wireframes (Low-Fi)</h4>
+                                <img src="https://placehold.co/800x600/f3f4f6/a3a3a3?text=Wireframes" 
+                                     onerror="this.src='https://placehold.co/800x600/f3f4f6/a3a3a3?text=Wireframes'"
+                                     alt="Wireframes de la app" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                            <!-- 2. Sistema de Diseño -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">Sistema de Diseño</h4>
+                                <img src="https://placehold.co/800x600/e0e7ff/4338ca?text=Styleguide+(Colores,+Tipografía)" 
+                                     onerror="this.src='https://placehold.co/800x600/e0e7ff/4338ca?text=Styleguide'"
+                                     alt="Sistema de diseño y styleguide" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                            <!-- 3. Mockups Finales -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">Mockups (Hi-Fi)</h4>
+                                <img src="https://placehold.co/800x600/6366f1/ffffff?text=Mockups+Finales" 
+                                     onerror="this.src='https://placehold.co/800x600/6366f1/ffffff?text=Mockups'"
+                                     alt="Mockups finales de alta fidelidad" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido de Ejemplo del Proyecto 2 (oculto) -->
+                <div id="project-2-content" class="hidden">
+                    <div class="p-8 md:p-12">
+                        <h2 class="text-3xl font-bold text-gray-900">Rediseño E-commerce de Moda</h2>
+                        <div class="flex flex-wrap gap-2 mt-3 mb-6">
+                            <span class="skill-tag">UX Research</span>
+                            <span class="skill-tag">Web Design</span>
+                            <span class="skill-tag">Sistema de Diseño</span>
+                        </div>
+                        <p class="text-lg text-gray-600">
+                            Se optimizó el flujo de compra basándose en investigación de usuarios para aumentar la conversión.
+                        </p>
+                    </div>
+                    <!-- Galería Visual del Proceso -->
+                    <div class="px-8 md:px-12 pb-12">
+                        <div class="modal-gallery">
+                            <!-- 1. User Journey -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">User Journey Map</h4>
+                                <img src="https://placehold.co/800x600/f3f4f6/a3a3a3?text=User+Journey+Map" 
+                                     onerror="this.src='https://placehold.co/800x600/f3f4f6/a3a3a3?text=User+Journey'"
+                                     alt="Mapa de viaje de usuario" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                            <!-- 2. Arquitectura de Información -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">Arquitectura de Información</h4>
+                                <img src="https://placehold.co/800x600/fbcfe8/9d174d?text=Arquitectura+de+Información" 
+                                     onerror="this.src='https://placehold.co/800x600/fbcfe8/9d174d?text=Site+Map'"
+                                     alt="Arquitectura de información" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                            <!-- 3. Mockups Finales (Desktop) -->
+                            <div class="modal-gallery-item">
+                                <h4 class="text-lg font-semibold text-gray-700 mb-3">Diseño Final (Desktop)</h4>
+                                <img src="https://placehold.co/800x600/ec4899/ffffff?text=Mockup+Web+Final" 
+                                     onerror="this.src='https://placehold.co/800x600/ec4899/ffffff?text=Mockup+Final'"
+                                     alt="Mockup final de la web" 
+                                     class="w-full rounded-lg shadow-md border border-gray-200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Lógica del Menú Móvil ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Cerrar menú móvil al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Lógica del Modal de Proyectos ---
+            const modal = document.getElementById('project-modal');
+            const modalContainer = document.getElementById('modal-container');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Ocultar todos los contenidos de proyectos
+            const allProjectContents = modalContent.querySelectorAll(':scope > div');
+            
+            const openModal = (projectId) => {
+                // Ocultar todos los contenidos
+                allProjectContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Mostrar el contenido del proyecto seleccionado
+                const activeProjectContent = document.getElementById(`project-${projectId}-content`);
+                if (activeProjectContent) {
+                    activeProjectContent.classList.remove('hidden');
+                    // Reiniciar el scroll de la galería
+                    activeProjectContent.querySelector('.modal-gallery')?.scrollTo(0, 0);
+                } else {
+                    console.error('No se encontró contenido para el proyecto ID:', projectId);
+                    return;
+                }
+
+                // Mostrar el modal
+                modal.classList.remove('invisible', 'opacity-0');
+                modalContainer.classList.remove('scale-95');
+                document.body.style.overflow = 'hidden'; // Evitar scroll del body
+            };
+
+            const closeModal = () => {
+                modal.classList.add('invisible', 'opacity-0');
+                modalContainer.classList.add('scale-95');
+                document.body.style.overflow = ''; // Restaurar scroll del body
+            };
+
+            // Abrir modal al hacer clic en una tarjeta
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const projectId = card.dataset.projectId;
+                    openModal(projectId);
+                });
+            });
+
+            // Cerrar modal
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                // Cerrar si se hace clic fuera del contenedor del modal
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            // Cerrar con la tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            // --- Lógica de Animación de Scroll (Fade-in) ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // La sección aparece cuando un 10% es visible
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
